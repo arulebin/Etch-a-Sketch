@@ -5,8 +5,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     colorInput.addEventListener("input",()=>{
         color=colorInput.value;
+        addEvent(color);
     });
-    createGrid(16,color);
+    createGrid(16);
+    
     //Erase Button
     const eraseButton=document.querySelector("#erase-btn");
     eraseButton.addEventListener("click",()=>{
@@ -21,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
     gridSize.addEventListener("click", changeSize);
 
     //Functions
-    function createGrid(n,color) {
+    function createGrid(n) {
         const gridContainer = document.getElementById('container');
         gridContainer.innerHTML = '';
         for (let i = 0; i < n * n; i++) {
@@ -31,9 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
             div.style.paddingBottom=`calc(100%/${n})`;
             gridContainer.appendChild(div);
         }
-        addEvent(color);
+        addEvent(colorInput.value);
     }
-    
     function addEvent(color) {
         const gridItem = document.querySelectorAll(".grid-item");
     
@@ -63,6 +64,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     
         isErasing=false;
-        createGrid(size, colorInput.value);
+        createGrid(size);
     }
 });

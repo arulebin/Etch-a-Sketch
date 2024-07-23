@@ -1,0 +1,65 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const colorInput=document.querySelector(".color-input");
+    let color=colorInput.value;
+    colorInput.addEventListener("input",()=>{
+        color=colorInput.value;
+        addEvent(color);
+    });
+    createGrid(16,color);
+    const eraseButton=document.querySelector("#erase-btn");
+    eraseButton.addEventListener("click",erase);
+    const clearButton = document.querySelector("#clear-btn");
+    clearButton.addEventListener("click", clear);
+    const gridSize = document.querySelector("#size-btn");
+    gridSize.addEventListener("click", changeSize);
+
+});
+function createGrid(n,color) {
+    const gridContainer = document.getElementById('container');
+    gridContainer.innerHTML = '';
+    for (let i = 0; i < n * n; i++) {
+        const div = document.createElement('div');
+        div.className = 'grid-item';
+        div.style.width= `calc(100% / ${n})`;
+        div.style.paddingBottom=`calc(100%/${n})`;
+        gridContainer.appendChild(div);
+    }
+    addEvent(color);
+}
+
+function addEvent(color) {
+    const gridItem = document.querySelectorAll(".grid-item");
+
+    gridItem.forEach(item => {
+        item.addEventListener("mouseover", (event) => {
+            event.target.style.backgroundColor = `${color}`;
+        });
+    });
+}
+function clear() {
+    const gridItem = document.querySelectorAll(".grid-item");
+
+    gridItem.forEach(item => {
+        item.style.backgroundColor = "white";
+    });
+}
+function changeSize() {
+    let size = parseInt(prompt("Enter the number of squares per side (1-100):"));
+
+    while (isNaN(size) || size < 1 || size > 100) {
+        alert("Invalid input! Please enter a number between 1 and 100.");
+        size = parseInt(prompt("Enter the number of squares per side (1-100):"));
+    }
+
+    const colorInput = document.querySelector(".color-input");
+    createGrid(size, colorInput.value);
+}
+function erase(){
+    const gridItem = document.querySelectorAll(".grid-item");
+
+    gridItem.forEach(item => {
+        item.addEventListener("mouseover", (event) => {
+            event.target.style.backgroundColor = "white";
+        });
+    });
+}

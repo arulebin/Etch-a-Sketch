@@ -35,9 +35,9 @@ body {
 .button {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
   gap:10px;
-  margin: 0 auto;
 }
 .btn {
   min-width: 100px;
@@ -61,4 +61,8 @@ body {
   font-weight: bold;
   transform: scale(1.05);
   cursor: pointer;
+}
+.active{
+    font-weight: bold;
+    transform: scale(1.05);
 }
